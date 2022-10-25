@@ -17,16 +17,16 @@ export const SignSlice = createSlice({
     name: 'SignUp',
     initialState,
     reducers: {
-        getSignUpName:(state, action: PayloadAction<string>) =>{
+        getSignUpName:(state, action: PayloadAction<string>) => {
             state.name = action.payload
         },
-        getSignUpEmail:(state, action: PayloadAction<string>) =>{
+        getSignUpEmail:(state, action: PayloadAction<string>) => {
             state.email = action.payload
         },
-        getSignUpPassword:(state, action: PayloadAction<string>)=>{
+        getSignUpPassword:(state, action: PayloadAction<string>) => {
             state.password = action.payload
         },
-        verifyPassword:(state, action: PayloadAction<string>) =>{
+        verifyPassword:(state, action: PayloadAction<string>) => {
             state.verifyPassword = action.payload
         }
     }

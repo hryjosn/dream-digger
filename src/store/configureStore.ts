@@ -4,7 +4,7 @@ import { loginSlice } from '../features/login/loginSlice';
 
 export const store = configureStore({
     reducer: {
-        loginUserAccount: loginSlice.reducer,
+        userAccount: loginSlice.reducer,
     }
 })
 

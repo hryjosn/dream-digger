@@ -4,8 +4,8 @@ import { getEmail, getPassword } from '../../features/login/loginSlice';
 import { Input } from '../../components/Input/Input'
 
 const Login = () => {
-  const email: string = String(useAppSelector(state => state.loginUserAccount.email));
-  const password: string = String(useAppSelector(state => state.loginUserAccount.password));
+  const email: string = String(useAppSelector(state => state.userAccount.email));
+  const password: string = String(useAppSelector(state => state.userAccount.password));
   const dispatch = useAppDispatch();
   return (
     <div className='flex flex-col h-[108vh] overflow-y-auto bg-[#f4f4f5]'>
@@ -37,7 +37,7 @@ const Login = () => {
                 </p>
                 <Input 
                   type='email'
-                  value={email} 
+                  value={email}
                   onChange={e => {
                     dispatch(getEmail(e.target.value))
                   }}

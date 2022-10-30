@@ -2,6 +2,7 @@ import React from 'react';
 import { useAppSelector, useAppDispatch } from '../../store/configureStore';
 import { getEmail, getPassword } from '../../features/login/loginSlice';
 import { Input } from '../../components/Input/Input'
+import About from '../../components/About/About';
 
 const Login = () => {
   const email: string = String(useAppSelector(state => state.userAccount.email));
@@ -82,28 +83,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className='flex justify-center bg-[#ffffff] basis-1/5'>
-        <div className='flex w-full flex-row justify-around items-center text-[#0050a2] text-[0.875rem]'>
-          <div className='flex flex-col'>
-            <h3 className='text-[14px] font-medium text-black'>Social media</h3>
-            <a>YouTube</a>
-            <a>Facebook</a>
-            <a>Instagram</a>
-            <a>Twitter</a>
-          </div>
-          <div className='flex flex-col'>
-            <h3 className='text-[14px] font-medium text-black'>Resources</h3>
-            <a>常見問答</a>
-            <a>使用條款</a>
-            <a>隱私權政策</a>
-          </div>
-          <div className='flex flex-col'>
-            <h3 className='text-[14px] font-medium text-black'>About</h3>
-            <a>關於我們</a>
-            <a className='mt-[10px] text-[#525252] text-[0.75rem]'>©Henry股份有限公司</a>
-          </div>
-        </div>
-      </div>
+      <About/>
     </div>
   )
 }

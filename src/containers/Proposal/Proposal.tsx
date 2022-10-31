@@ -1,10 +1,11 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
 import About from '../../components/About/About';
+import AnnouncementIcon from '@mui/icons-material/Announcement';
 
 const Proposal = () => {
   return (
-    <div className='flex flex-col h-[108vh] items-center overflow-y-auto'>
+    <div className='flex flex-col h-[108vh] items-center'>
         <Header/>
         <div className='w-full flex flex-col justify-center items-center mb-[4rem] border-b '>
             <h2 className='text-[1.5rem] font-bold mt-[2rem] mb-[2rem]'>選擇題案類別</h2>
@@ -54,6 +55,7 @@ const Proposal = () => {
                 <div className='w-full flex justify-center items-center mt-[4.5rem] mb-[7rem]'>
                     <div className='flex justify-center w-[498px] border-t pl-[1rem] pr-[1rem] pt-[2rem]'>
                         <p>
+                            <AnnouncementIcon color="action"/>
                             不確定怎麼準備專案？現在就加入
                             <a className='text-[#0050a2] cursor-pointer'>嘖嘖提案人前哨站</a>
                             與大家切磋討論

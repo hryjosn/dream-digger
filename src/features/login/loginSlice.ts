@@ -1,9 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type UserAccountStates = {
-    email: String,
-    password: String,
-}
+import { UserAccountStates } from './loginType';
 
 const initialState: UserAccountStates = {
     email: '',
@@ -21,6 +17,6 @@ export const loginSlice = createSlice({
             state.password = action.payload
         },
     }
-})
+});
 
 export const { getEmail, getPassword } = loginSlice.actions;

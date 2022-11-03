@@ -12,6 +12,14 @@ const initialState: proposalDataStates = {
         hour: '00',
         minute: '00',
     },
+    endTime: {
+        year: (new Date().getFullYear() + 1).toString(),
+        month: '一月',
+        day: '1',
+        hour: '00',
+        minute: '00',
+    },
+    targetAmount: '',
     category: '',
     planName: '',
     planSummary: '',
@@ -44,24 +52,48 @@ export const proposalSlice = createSlice({
         getEmail: (state, action: PayloadAction<string>) => {
             state.email = action.payload;
         },
-        getYear: (state, action: PayloadAction<string>) => {
+        getStartYear: (state, action: PayloadAction<string>) => {
             state.startTime.year = action.payload;
         },
-        getMonth: (state, action: PayloadAction<string>) => {
+        getStartMonth: (state, action: PayloadAction<string>) => {
             state.startTime.month = action.payload;
         },
-        getDay: (state, action: PayloadAction<string>) => {
+        getStartDay: (state, action: PayloadAction<string>) => {
             state.startTime.day = action.payload;
         },
-        getHour: (state, action: PayloadAction<string>) => {
+        getStartHour: (state, action: PayloadAction<string>) => {
             state.startTime.hour = action.payload;
         },
-        getMinute: (state, action: PayloadAction<string>) => {
+        getStartMinute: (state, action: PayloadAction<string>) => {
             state.startTime.minute = action.payload;
+        },
+        getEndYear: (state, action: PayloadAction<string>) => {
+            state.endTime.year = action.payload;
+        },
+        getEndMonth: (state, action: PayloadAction<string>) => {
+            state.endTime.month = action.payload;
+        },
+        getEndDay: (state, action: PayloadAction<string>) => {
+            state.endTime.day = action.payload;
+        },
+        getEndHour: (state, action: PayloadAction<string>) => {
+            state.endTime.hour = action.payload;
+        },
+        getEndMinute: (state, action: PayloadAction<string>) => {
+            state.endTime.minute = action.payload;
         }
-        }
-    
-    },
-);
+    }    
+});
 
-export const { getYear, getMonth, getDay, getHour, getMinute } = proposalSlice.actions;
+export const { 
+        getStartYear, 
+        getStartMonth,
+        getStartDay, 
+        getStartHour, 
+        getStartMinute,
+        getEndYear,
+        getEndMonth,
+        getEndDay,
+        getEndHour,
+        getEndMinute,
+    } = proposalSlice.actions;

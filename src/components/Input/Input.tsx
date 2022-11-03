@@ -1,5 +1,4 @@
 import React from "react";
-import type { AppProps } from 'next/app'
 
 export const Input = (props: JSX.IntrinsicAttributes & React.ClassAttributes<HTMLInputElement> & React.InputHTMLAttributes<HTMLInputElement>) => {
     return (

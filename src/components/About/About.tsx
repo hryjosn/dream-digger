@@ -2,7 +2,7 @@ import React from 'react'
 
 const About = () => {
   return (
-    <div className='flex justify-center bg-[#ffffff] basis-1/5 '>
+    <div className='flex justify-center bg-[#ffffff] basis-1/5 border-t pt-16 pb-[8rem]'>
         <div className='flex w-[1365px] flex-row justify-around items-center text-[#0050a2] text-[0.875rem]'>
           <div className='flex flex-col'>
             <h3 className='text-[14px] font-medium text-black'>Social media</h3>

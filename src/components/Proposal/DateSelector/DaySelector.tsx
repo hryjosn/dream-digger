@@ -3,7 +3,7 @@ import React from 'react'
 const DaySelector = (props: JSX.IntrinsicAttributes & React.ClassAttributes<HTMLSelectElement> & React.SelectHTMLAttributes<HTMLSelectElement>) => {
     return (
         <select 
-            className='h-[36px] border rounded font-medium'
+            className='h-[36px] border rounded font-medium pb-[3px]'
             {...props}
         >
             <option>1</option>

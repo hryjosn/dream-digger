@@ -7,7 +7,7 @@ const Proposal = () => {
   return (
     <div className='flex flex-col h-[108vh] items-center'>
         <Header/>
-        <div className='w-full flex flex-col justify-center items-center mb-[4rem] border-b '>
+        <div className='w-full flex flex-col justify-center items-center mb-[4rem]'>
             <h2 className='text-[1.5rem] font-bold mt-[2rem] mb-[2rem]'>選擇題案類別</h2>
             <div className='flex w-[1024px] mb-[2rem] flex-wrap text-[14px]'>
                 <div className='w-[33%] pl-[1rem] pr-[1rem]'>

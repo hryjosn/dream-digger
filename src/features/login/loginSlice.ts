@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type UserAccountStates = {
-    email: String,
-    password: String,
+    email: string,
+    password: string,
 }
 
 const initialState: UserAccountStates = {
@@ -10,7 +10,7 @@ const initialState: UserAccountStates = {
     password: '',
 };
 
-export const loginSlice = createSlice({
+const loginSlice = createSlice({
     name: 'userAccount',
     initialState,
     reducers: {
@@ -24,3 +24,4 @@ export const loginSlice = createSlice({
 })
 
 export const { getEmail, getPassword } = loginSlice.actions;
+export default loginSlice.reducer

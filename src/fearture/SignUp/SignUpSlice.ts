@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 type SignUpState = {
-    name: String,
-    email: String,
-    password: String,
-    verifyPassword: String,
+    name: string,
+    email: string,
+    password: string,
+    verifyPassword: string,
 }
 
 export const initialState: SignUpState = {
@@ -32,4 +32,5 @@ export const SignSlice = createSlice({
     }
 })
 
-export const { getSignUpName, getSignUpEmail, getSignUpPassword, verifyPassword} = SignSlice.actions
+export const { getSignUpName, getSignUpEmail, getSignUpPassword, verifyPassword} = SignSlice.actions;
+export default SignSlice.reducer

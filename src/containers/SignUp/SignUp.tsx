@@ -3,10 +3,10 @@ import { useAppDispatch, useAppSelector } from '../../store/configureStore';
 import { getSignUpName, getSignUpEmail,  getSignUpPassword, verifyPassword } from '../../fearture/SignUp/SignUpSlice';
 
 const SignUp = () => {
-    const name: string = String(useAppSelector(state => state.SignUpData.name));
-    const email: string = String(useAppSelector(state => state.SignUpData.email));
-    const password: string = String(useAppSelector(state => state.SignUpData.password));
-    const checkPassword: string = String(useAppSelector(state => state.SignUpData.verifyPassword))
+    const name = (useAppSelector(state => state.SignUpData.name));
+    const email = (useAppSelector(state => state.SignUpData.email));
+    const password = (useAppSelector(state => state.SignUpData.password));
+    const checkPassword = (useAppSelector(state => state.SignUpData.verifyPassword))
     const dispatch = useAppDispatch()
   return (
     <div className=''>

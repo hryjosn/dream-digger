@@ -11,7 +11,7 @@ const Proposal = () => {
             <h2 className='text-[1.5rem] font-bold mt-[2rem] mb-[2rem]'>選擇題案類別</h2>
             <div className='flex w-[1024px] mb-[2rem] flex-wrap text-[14px]'>
                 <div className='w-[33%] pl-[1rem] pr-[1rem]'>
-                    <a className='cursor-pointer'>
+                    <a className='cursor-pointer' href='http://localhost:3000/proposal/crowdfunding'>
                         <div className='flex flex-col justify-center items-center w-[309px] h-[132px] border rounded border-[#229f2a]'>
                             <div className='text-[1.25rem] text-[#229f2a]'>群眾集資</div>
                             <p className='text-[0.875rem] mt-[1rem]'>在一定期限內募集完成計畫所需的資金</p>
@@ -25,7 +25,7 @@ const Proposal = () => {
                     </p>
                 </div>
                 <div className='w-[33%] pl-[1rem] pr-[1rem]'>
-                    <a className='cursor-pointer'>
+                    <a className='cursor-pointer' href='http://localhost:3000/proposal/presale'>
                         <div className='flex flex-col justify-center items-center w-[309px] h-[132px] border rounded border-[#3366a9] '>
                             <div className='text-[1.25rem] text-[#3366a9]'>預購式專案</div>
                             <p className='text-[0.875rem] mt-[1rem]'>讓你的新產品在上市前進行即刻預購</p>
@@ -39,7 +39,7 @@ const Proposal = () => {
                     </p>
                 </div>
                 <div className='w-[33%] pl-[1rem] pr-[1rem]'>
-                    <a className='cursor-pointer'>
+                    <a className='cursor-pointer' href='http://localhost:3000/proposal/subscription'>
                         <div className='flex flex-col justify-center items-center w-[309px] h-[132px] border rounded border-[#a06389] '>
                             <div className='text-[1.25rem] text-[#a06389]'>訂閱式專案</div>
                             <p className='text-[0.875rem] mt-[1rem]'>用持續性的計畫累積每月可獲得的贊助</p>

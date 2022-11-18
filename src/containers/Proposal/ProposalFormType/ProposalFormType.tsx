@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Header from '../../../components/Header/Header';
 import About from '../../../components/About/About';
@@ -9,7 +9,9 @@ import HourSelector from '../../../components/Proposal/DateSelector/HourSelector
 import MinuteSelector from '../../../components/Proposal/DateSelector/MinuteSelector';
 import CategorySelector from '../../../components/Proposal/CategorySelector/CategorySelector';
 import { useAppSelector, useAppDispatch } from '../../../store/configureStore';
-import { 
+import {
+  getProposalType,
+  setProposalTitle,
   getStartYear, 
   getStartMonth, 
   getStartDay, 
@@ -20,20 +22,49 @@ import {
   getEndDay,
   getEndHour,
   getEndMinute,
-} from '../../../features/proposal/proposalSlice';
+} from '../../../slice/proposal/proposalSlice';
 
 const ProposalType = () => {
   const router = useRouter();
   const { proposalType } = router.query;
-  const startTimeState = useAppSelector(state => state.proposalData.startTime);
-  const endTimeState = useAppSelector(state => state.proposalData.endTime);
+  const startTimeState = useAppSelector(state => state.proposalData.params.startTime);
+  const endTimeState = useAppSelector(state => state.proposalData.params.endTime);
+  const proposalTitleState = useAppSelector(state => state.proposalData.proposalTitle);
+  const proposalTypeState = useAppSelector(state => state.proposalData.params.proposalType);
   const dispatch = useAppDispatch();
-  console.log(startTimeState, endTimeState)
+  
+  useEffect(() => {
+    switch(proposalType){
+      case 'crowdfunding': {
+        dispatch(getProposalType('crowdfunding'));
+        dispatch(setProposalTitle('群眾集資'));
+        break;
+      }
+      case 'presale': {
+        dispatch(getProposalType('presale'));
+        dispatch(setProposalTitle('預購式專案'));
+        break;
+      }
+      case 'subscription': {
+        dispatch(getProposalType('subscription'));
+        dispatch(setProposalTitle('訂閱式專案'));
+        break;
+      }
+    }
+  });
+
   return (
     <div className='flex flex-col items-center'>
       <Header/>
       <div className='flex flex-col items-center mb-16'>
-        <h2 className='text-2xl mt-[2rem] mb-[2rem]'>{proposalType}</h2>
+        <h2 className='text-2xl my-[2rem] font-bold'>
+          <span className='bg-[#f4f4f5] p-1'>
+            {proposalTitleState}
+          </span>
+          <span className='ml-[5px]'>
+            提案
+          </span>
+        </h2>
         <div className='flex flex-col border h-[2411px] w-[768px] p-[2rem]'>
           <label className='font-bold'>真實身分/名稱</label>
           <div className='flex items-center justify-center h-[41.6px] p-[5px] w-fit mt-[5px] rounded bg-[#f4f4f5] font-bold'>
@@ -83,59 +114,65 @@ const ProposalType = () => {
           <p className='mb-[1rem] text-xs text-neutral-600'>
             告訴我們你希望什麼時候開始你的計畫，我們將會為你安排審核順序。至少需要約十個工作天審核你的提案。
           </p>
-          <label className='font-bold'>預計結束時間</label>
-          <div className='flex flex-row items-center justify-left mt-[5px] mb-[11px]'>
-            <YearSelector 
-              value={endTimeState.year}
-              onChange={e => dispatch(getEndYear(e.target.value))}
-            />
-            <div className='mx-[7px] font-bold'>-</div>
-            <MonthSelector 
-              value={endTimeState.month}
-              onChange={e => dispatch(getEndMonth(e.target.value))}
-            />
-            <div className='mx-[7px] font-bold'>-</div>
-            <DaySelector 
-              value={endTimeState.day}
-              onChange={e => dispatch(getEndDay(e.target.value))}
-            />
-            <div className='mx-[7px] font-bold w-[15px]'>-</div>
-            <HourSelector
-              value={endTimeState.hour}
-              onChange={e => dispatch(getEndHour(e.target.value))}
-            />
-            <div className='font-bold w-[15px]'>：</div>
-            <MinuteSelector
-              value={endTimeState.minute}
-              onChange={e => dispatch(getEndMinute(e.target.value))}
-            />
-          </div>
-          <p className='mb-[1rem] mt-[0.25rem] text-xs text-neutral-600'>
-            計畫時間建議為期在 60 天內。
-          </p>
-          <label className='font-bold'>計畫目標</label>
-          <div className='flex items-center'>
-            <input 
-              className='h-[34px] w-[110px] border mt-[6px] pb-[3px] pl-[0.5rem]'
-              type='text'
-            />
-            <p className='ml-[10px]'>
-              NTD
-            </p>
-          </div>
-          <p className='mb-[1rem] mt-[0.25rem] text-xs text-neutral-600'>
-            請根據你計畫的需求，估算你所需要募集的金額。
-          </p>
+          {proposalTypeState === 'subscription' ? 
+            null : 
+            (<div>
+              <label className='font-bold'>預計結束時間</label>
+              <div className='flex flex-row items-center justify-left mt-[5px] mb-[11px]'>
+                <YearSelector 
+                  value={endTimeState.year}
+                  onChange={e => dispatch(getEndYear(e.target.value))}
+                />
+                <div className='mx-[7px] font-bold'>-</div>
+                <MonthSelector 
+                  value={endTimeState.month}
+                  onChange={e => dispatch(getEndMonth(e.target.value))}
+                />
+                <div className='mx-[7px] font-bold'>-</div>
+                <DaySelector 
+                  value={endTimeState.day}
+                  onChange={e => dispatch(getEndDay(e.target.value))}
+                />
+                <div className='mx-[7px] font-bold w-[15px]'>-</div>
+                <HourSelector
+                  value={endTimeState.hour}
+                  onChange={e => dispatch(getEndHour(e.target.value))}
+                />
+                <div className='font-bold w-[15px]'>：</div>
+                <MinuteSelector
+                  value={endTimeState.minute}
+                  onChange={e => dispatch(getEndMinute(e.target.value))}
+                />
+              </div>
+              <p className='mb-[1rem] mt-[0.25rem] text-xs text-neutral-600'>
+                計畫時間建議為期在 60 天內。
+              </p>
+              <label className='font-bold'>計畫目標</label>
+              <div className='flex items-center'>
+                <input 
+                  className='h-[34px] w-[110px] border mt-[6px] pb-[3px] pl-[0.5rem]'
+                  type='text'
+                />
+                <p className='ml-[10px]'>
+                  NTD
+                </p>
+              </div>
+              <p className='mb-[1rem] mt-[0.25rem] text-xs text-neutral-600'>
+                請根據你計畫的需求，估算你所需要募集的金額。
+              </p>
+            </div>
+            )
+          }
           <label className='font-bold'>分類</label>
           <CategorySelector/>
           <label className='font-bold mt-[1rem] mb-[5px]'>計畫名稱</label>
           <input 
-            className='border h-[34px] pb-[3px] pl-[0.5rem] mb-[0.5rem]'
+            className='border h-[34px] pb-[3px] pt-[3px] pl-[0.5rem] mb-[0.5rem]'
             type='text'
           />
           <label className='font-bold mt-[1rem] mb-[5px]'>計畫簡介</label>
           <input 
-            className='border h-[34px] pb-[3px] pl-[0.5rem] mb-[0.5rem]'
+            className='border h-[34px] pb-[3px] pt-[3px] pl-[0.5rem] mb-[0.5rem]'
             type='text'
           />
           <p className='mb-[1rem] mt-[0.25rem] text-xs text-neutral-600'>
@@ -143,7 +180,7 @@ const ProposalType = () => {
           </p>
           <label className='font-bold mt-[0.5rem] mb-[5px]'>封面照片</label>
           <input
-            className='border w-[364px] py-1 px-2 mb-4'
+            className='border w-[364px] pt-1 pb-2.5 px-2 mb-4'
             type='file'
           />
           <label className='font-bold mt-[1rem] mb-[5px]'>計畫說明</label>
@@ -158,10 +195,15 @@ const ProposalType = () => {
           </p>
           <div className='border-t my-4'/>
           <label className='font-bold mt-[1rem] mb-[5px]'>回饋選項金額（一）</label>
-          <input 
-            className='border h-[34px] w-[209px] pb-[3px] pl-[0.5rem] mb-[0.5rem]'
-            type='text'
-          />
+          <div>
+            <input 
+              className='border h-[34px] w-[209px] pb-[3px] pt-[3px] pl-[0.5rem] mb-[0.5rem]'
+              type='text'
+            />
+            {proposalTypeState === 'subscription' ?
+              <span className='ml-[5px]'>/ 月</span> : null
+            }
+          </div>
           <label className='font-bold mb-[5px]'>回饋選項內容說明（一）</label>
           <textarea
             className='border px-[0.5rem] py-1 mb-2 overflow-visible'
@@ -169,17 +211,27 @@ const ProposalType = () => {
           <p className='mt-2 text-xs text-neutral-600'>
             僅供審核，之後可增加、刪減、或修改。
           </p>
-          <label className='font-bold mt-[1rem] mb-[5px]'>回饋預計實現時間（一）</label>
-          <div className='flex flex-row items-center mb-[1rem]'>
-            <YearSelector/>
-            <div className='mx-[7px] font-bold'>-</div>
-            <MonthSelector/>
-          </div>
+          {proposalTypeState === 'subscription' ?
+            null :
+            <div className='mt-[1rem]'>
+              <label className='font-bold mb-[5px]'>回饋預計實現時間（一）</label>
+              <div className='flex flex-row items-center mb-[1rem]'>
+                <YearSelector/>
+                <div className='mx-[7px] font-bold'>-</div>
+                <MonthSelector/>
+              </div>
+            </div>
+          }
           <label className='font-bold mt-[1rem] mb-[5px]'>回饋選項金額（二）</label>
-          <input 
-            className='border h-[34px] w-[209px] pb-[3px] pl-[0.5rem] mb-[0.5rem]'
+          <div>
+            <input 
+            className='border h-[34px] w-[209px] pb-[3px] pt-[3px] pl-[0.5rem] mb-[0.5rem]'
             type='text'
-          />
+            />
+            {proposalTypeState === 'subscription' ?
+              <span className='ml-[5px]'>/ 月</span> : null
+            }
+          </div>
           <label className='font-bold mb-[5px]'>回饋選項內容說明（二）</label>
           <textarea
             className='border px-[0.5rem] py-1 mb-2 overflow-visible'
@@ -187,16 +239,21 @@ const ProposalType = () => {
           <p className='mt-2 text-xs text-neutral-600'>
             僅供審核，之後可增加、刪減、或修改。
           </p>
-          <label className='font-bold mt-[1rem] mb-[5px]'>回饋預計實現時間（二）</label>
-          <div className='flex flex-row items-center mb-[1rem]'>
-            <YearSelector/>
-            <div className='mx-[7px] font-bold'>-</div>
-            <MonthSelector/>
-          </div>
+          {proposalTypeState === 'subscription' ?
+            null :
+            <div className='mt-[1rem]'>
+              <label className='font-bold mb-[5px]'>回饋預計實現時間（二）</label>
+              <div className='flex flex-row items-center mb-[1rem]'>
+                <YearSelector/>
+                <div className='mx-[7px] font-bold'>-</div>
+                <MonthSelector/>
+              </div>
+            </div>
+          }
           <div className='border-t my-8'/>
           <label className='font-bold mb-[5px]'>相關網頁</label>
           <input 
-            className='border h-[34px] pb-[3px] pl-[0.5rem] mb-[0.5rem]'
+            className='border h-[34px] pb-[3px] pt-[3px] pl-[0.5rem] mb-[0.5rem]'
             type='text'
           />
           <p className='mt-2 text-xs text-[#c45059] mb-4'>
@@ -204,7 +261,7 @@ const ProposalType = () => {
           </p>
           <label className='font-bold mb-[5px]'>影片網址</label>
           <input 
-            className='border h-[34px] pb-[3px] pl-[0.5rem] mb-[0.5rem]'
+            className='border h-[34px] pb-[3px] pt-[3px] pl-[0.5rem] mb-[0.5rem]'
             type='text'
           />
           <p className='mt-2 text-xs text-neutral-600 mb-4'>

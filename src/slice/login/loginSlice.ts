@@ -6,7 +6,7 @@ const initialState: UserAccountStates = {
     password: '',
 };
 
-export const loginSlice = createSlice({
+const loginSlice = createSlice({
     name: 'userAccount',
     initialState,
     reducers: {
@@ -20,3 +20,4 @@ export const loginSlice = createSlice({
 });
 
 export const { getEmail, getPassword } = loginSlice.actions;
+export default loginSlice.reducer;

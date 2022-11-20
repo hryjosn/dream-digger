@@ -4,7 +4,7 @@ import { proposalDataStates } from './proposalType';
 const initialState: proposalDataStates = {
     params: {
         //提案類型
-        proposalType: 'crowdfunding' || 'presale' || 'subscription',
+        proposalType: '群眾集資' || '預購式專案' || '訂閱式專案',
         //真實名稱
         name: '',
         //信箱
@@ -63,7 +63,6 @@ const initialState: proposalDataStates = {
         //影片網址
         videoLink: '',
     },
-    proposalTitle: '群眾集資' || '預購式專案' || '訂閱式專案',
 };
 
 const proposalSlice = createSlice({

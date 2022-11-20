@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Header from '../../../components/Header/Header';
 import About from '../../../components/About/About';
@@ -11,7 +11,6 @@ import CategorySelector from '../../../components/Proposal/CategorySelector/Cate
 import { useAppSelector, useAppDispatch } from '../../../store/configureStore';
 import {
   getProposalType,
-  setProposalTitle,
   getStartYear, 
   getStartMonth, 
   getStartDay, 
@@ -29,25 +28,21 @@ const ProposalType = () => {
   const { proposalType } = router.query;
   const startTimeState = useAppSelector(state => state.proposalData.params.startTime);
   const endTimeState = useAppSelector(state => state.proposalData.params.endTime);
-  const proposalTitleState = useAppSelector(state => state.proposalData.proposalTitle);
   const proposalTypeState = useAppSelector(state => state.proposalData.params.proposalType);
   const dispatch = useAppDispatch();
   
   useEffect(() => {
     switch(proposalType){
       case 'crowdfunding': {
-        dispatch(getProposalType('crowdfunding'));
-        dispatch(setProposalTitle('群眾集資'));
+        dispatch(getProposalType('群眾集資'));
         break;
       }
       case 'presale': {
-        dispatch(getProposalType('presale'));
-        dispatch(setProposalTitle('預購式專案'));
+        dispatch(getProposalType('預購式專案'));
         break;
       }
       case 'subscription': {
-        dispatch(getProposalType('subscription'));
-        dispatch(setProposalTitle('訂閱式專案'));
+        dispatch(getProposalType('訂閱式專案'));
         break;
       }
     }
@@ -59,7 +54,7 @@ const ProposalType = () => {
       <div className='flex flex-col items-center mb-16'>
         <h2 className='text-2xl my-[2rem] font-bold'>
           <span className='bg-[#f4f4f5] p-1'>
-            {proposalTitleState}
+            {proposalTypeState}
           </span>
           <span className='ml-[5px]'>
             提案

@@ -38,5 +38,4 @@ export type proposalDataStates = {
         webLink: string,
         videoLink: string,
     },
-    proposalTitle: string,
 };

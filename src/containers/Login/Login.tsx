@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '../../store/configureStore';
-import { getEmail, getPassword, loginHandler } from '../../slice/login/loginSlice';
+import { getEmail, getPassword } from '../../slice/login/loginSlice';
 import { Input } from '../../components/Input/Input';
 import { callLoginService } from '../../api/api';
 

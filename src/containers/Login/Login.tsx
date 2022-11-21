@@ -1,7 +1,8 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '../../store/configureStore';
-import { getEmail, getPassword } from '../../slice/login/loginSlice';
-import { Input } from '../../components/Input/Input'
+import { getEmail, getPassword, loginHandler } from '../../slice/login/loginSlice';
+import { Input } from '../../components/Input/Input';
+import { callLoginService } from '../../api/api';
 
 const Login = () => {
   const email: string = String(useAppSelector(state => state.userAccount.email));
@@ -56,7 +57,7 @@ const Login = () => {
                   <button 
                     className='h-[42px] w-[84px] mr-[20px] rounded-md border-solid border border-[#229f2a] hover:border-black font-bold text-[#229f2a] hover:text-black'
                     onClick={() =>{
-                      console.log(email,password)
+                      callLoginService({email: email, password: password});
                     }}
                   >
                     登入

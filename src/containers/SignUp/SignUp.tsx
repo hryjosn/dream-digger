@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../store/configureStore';
-import { getSignUpName, getSignUpEmail,  getSignUpPassword, verifyPassword } from '../../fearture/SignUp/SignUpSlice';
+import { getSignUpName, getSignUpEmail,  getSignUpPassword, verifyPassword } from '../../slice/SignUp/SignUpSlice';
 
 const SignUp = () => {
     const name = (useAppSelector(state => state.SignUpData.name));

@@ -13,7 +13,7 @@ export const userApi = createApi({
         body: userAccount,
       }),
     }),
-    signUpDataService: builder.mutation<responseType, SingUpDataType>({
+    signUpApi: builder.mutation<responseType, SingUpDataType>({
       query: (signupData) => ({
         url: './signup',
         method: 'POST',
@@ -23,5 +23,5 @@ export const userApi = createApi({
   }),
 });
 
-export const { useUserLoginServiceMutation, useSignUpDataServiceMutation } = userApi;
+export const { useUserLoginServiceMutation, useSignUpApiMutation } = userApi;
 export default userApi.reducer;

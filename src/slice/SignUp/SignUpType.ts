@@ -1,6 +1,10 @@
 export type SignUpType = {
-    name: string,
-    email: string,
-    password: string,
+    params: {
+        name: string,
+        email: string,
+        password: string,  
+    },
     verifyPassword: string,
+    setErrorMsg: string,
+    
 }

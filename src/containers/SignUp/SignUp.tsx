@@ -1,15 +1,31 @@
 import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../store/configureStore';
-import { getSignUpName, getSignUpEmail,  getSignUpPassword, /*verifyPassword*/ } from '../../slice/SignUp/SignUpSlice';
-import { useSignUpDataServiceMutation } from '../../apiSlice/userApi/userApiSlice';
+import { getSignUpName, getSignUpEmail,  getSignUpPassword, verifyPassword, setErrorMsg } from '../../slice/SignUp/SignUpSlice';
+import { useSignUpApiMutation } from '../../apiSlice/userApi/userApiSlice';
 
 const SignUp = () => {
-    const name = (useAppSelector(state => state.SignUpData.name));
-    const email = (useAppSelector(state => state.SignUpData.email));
-    const password = (useAppSelector(state => state.SignUpData.password));
+    const name = (useAppSelector(state => state.SignUpData.params.name));
+    const email = (useAppSelector(state => state.SignUpData.params.email));
+    const password = (useAppSelector(state => state.SignUpData.params.password));
     const checkPassword = (useAppSelector(state => state.SignUpData.verifyPassword))
+    const errorMessage = (useAppSelector(state => state.SignUpData.setErrorMsg))
     const dispatch = useAppDispatch();
-    const [ trigger ] = useSignUpDataServiceMutation()
+    const [ trigger ] = useSignUpApiMutation()
+    const signUpHandler = async() =>{
+        try {
+            if(name || email || password || checkPassword){
+                if (password == checkPassword){
+                    const result = await trigger({name, email, password}).unwrap();
+                }else{
+                    dispatch(setErrorMsg('確認密碼錯誤'))
+                }
+            }else{
+                dispatch(setErrorMsg('請填入完整資料'))
+            }
+        } catch (error) {
+            dispatch(setErrorMsg('電子信箱已存在'))
+        }
+    }
   return (
     <div className=''>
         <div className='flex'>
@@ -22,6 +38,19 @@ const SignUp = () => {
             </div>
             <div className='w-1/2 h-[900px]'>
                 <div className='flex flex-col items-left justify-start ml-[60px] mt-[140px] w-[800px]'>
+                    {errorMessage?
+                        (<div className='flex justify-between border-b mb-8 pb-4 text-[#C45059] border-[#C45059]'>
+                        <p>{errorMessage}</p>
+                        <button 
+                          onClick={() => {
+                            dispatch(setErrorMsg(''));
+                          }}
+                        >
+                          ×
+                        </button>
+                      </div>):
+                      undefined
+                    }
                     <div className=''>
                         <h3><p className='text-xl font-bold my-4'>註冊帳號</p></h3>
                     </div>
@@ -98,10 +127,10 @@ const SignUp = () => {
                         <input
                             type='password'
                             id='verifyPassword'
-                            /*value={checkPassword}
+                            value={checkPassword}
                             onChange = {e =>{
                                 dispatch(verifyPassword(e.target.value))
-                            }}*/
+                            }}
                             className='border border-inherit h-[35px] w-[800px] caret-black p-2'>
                         </input>
                     </div>
@@ -122,6 +151,9 @@ const SignUp = () => {
                     <div>
                         <button 
                             className='bg-transparent hover:bg-[#30ba55] text-[#30ba55] font-semibold hover:text-white py-2 px-6 border border-[#30ba55] hover:border-transparent rounded'
+                            onClick={()=>{
+                                signUpHandler();
+                            }}
                             >
                             註冊
                         </button>

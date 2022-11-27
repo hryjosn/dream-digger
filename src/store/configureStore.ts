@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import SignSlice from "../slice/SignUp/SignUpSlice";
+import SignReducer from "../slice/SignUp/SignUpSlice";
 import LoginReducer from '../slice/login/loginSlice';
 import userApiReducer, { userApi } from '../apiSlice/userApi/userApiSlice';
 
@@ -9,7 +9,7 @@ export const store = configureStore({
     reducer: {
         userAccount: LoginReducer,
         userApi: userApiReducer,
-        SignUpData: SignSlice,
+        SignUpData: SignReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(userApi.middleware),

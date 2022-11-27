@@ -20,11 +20,11 @@ export const SignSlice = createSlice({
         getSignUpPassword:(state, action: PayloadAction<string>) => {
             state.password = action.payload
         },
-        verifyPassword:(state, action: PayloadAction<string>) => {
+        /*verifyPassword:(state, action: PayloadAction<string>) => {
             state.verifyPassword = action.payload
-        }
+        }*/
     }
 })
 
-export const { getSignUpName, getSignUpEmail, getSignUpPassword, verifyPassword} = SignSlice.actions;
+export const { getSignUpName, getSignUpEmail, getSignUpPassword, /*verifyPassword*/} = SignSlice.actions;
 export default SignSlice.reducer

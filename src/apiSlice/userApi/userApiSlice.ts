@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { UserAccountType, responseType } from './types';
+import signup from '../../../pages/signup';
+import { UserAccountType, responseType, SingUpDataType } from './types';
 
 export const userApi = createApi({
   reducerPath: 'userApi',
@@ -12,8 +13,15 @@ export const userApi = createApi({
         body: userAccount,
       }),
     }),
+    signUpDataService: builder.mutation<responseType, SingUpDataType>({
+      query: (signupData) => ({
+        url: './signup',
+        method: 'POST',
+        body: signupData,
+      })
+    })
   }),
 });
 
-export const { useUserLoginServiceMutation } = userApi;
+export const { useUserLoginServiceMutation, useSignUpDataServiceMutation } = userApi;
 export default userApi.reducer;

@@ -1,4 +1,4 @@
-export type UserAccountType = {
+export type LoginType = {
     email: string,
     password: string,
 }

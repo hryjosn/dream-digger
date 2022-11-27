@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../store/configureStore';
 import { getEmail, getPassword } from '../../slice/login/loginSlice';
 import { Input } from '../../components/Input/Input';
-import { useUserLoginServiceMutation } from '../../apiSlice/userApi/userApiSlice';
+import { useLoginApiMutation } from '../../apiSlice/userApi/userApiSlice';
 
 const Login = () => {
   const [showErrorMsg, setShowErrorMsg] = useState(false);
   const email: string = String(useAppSelector(state => state.userAccount.email));
   const password: string = String(useAppSelector(state => state.userAccount.password));
   const dispatch = useAppDispatch();
-  const [ trigger ] = useUserLoginServiceMutation();
+  const [ trigger ] = useLoginApiMutation();
   const loginHandler = async () => {
     try{
       if(email && password){

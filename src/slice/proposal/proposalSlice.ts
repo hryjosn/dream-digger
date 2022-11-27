@@ -72,9 +72,6 @@ const proposalSlice = createSlice({
         getProposalType: (state, action: PayloadAction<string>) => {
             state.params.proposalType = action.payload;
         },
-        setProposalTitle: (state, action: PayloadAction<string>) => {
-            state.proposalTitle = action.payload;
-        },
         getName: (state, action: PayloadAction<string>) => {
             state.params.name = action.payload;
         },
@@ -116,7 +113,6 @@ const proposalSlice = createSlice({
 
 export const {
         getProposalType,
-        setProposalTitle,
         getStartYear, 
         getStartMonth,
         getStartDay, 

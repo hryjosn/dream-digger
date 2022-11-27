@@ -17,7 +17,7 @@ const loginSlice = createSlice({
             state.password = action.payload
         },
     }
-})
+});
 
 export const { getEmail, getPassword } = loginSlice.actions;
-export default loginSlice.reducer
+export default loginSlice.reducer;

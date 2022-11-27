@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppSelector, useAppDispatch } from '../../store/configureStore';
 import { getEmail, getPassword } from '../../slice/login/loginSlice';
 import { Input } from '../../components/Input/Input';
-import { callLoginService } from '../../api/api';
+import About from '../../components/About/About';
 
 const Login = () => {
   const email: string = String(useAppSelector(state => state.userAccount.email));
@@ -10,7 +10,7 @@ const Login = () => {
   const dispatch = useAppDispatch();
   return (
     <div className='flex flex-col h-[108vh] overflow-y-auto bg-[#f4f4f5]'>
-      <div className='flex basis-4/5 border-solid border border-[#e5e5e5]'>
+      <div className='flex basis-4/5 border-solid border-b border-[#e5e5e5]'>
         <div className='flex justify-center self-center basis-1/2 h-1/5'>
           <div className='flex w-[700px] self-center justify-end whitespace-pre font-bold font-mono'>
             <p>
@@ -57,7 +57,6 @@ const Login = () => {
                   <button 
                     className='h-[42px] w-[84px] mr-[20px] rounded-md border-solid border border-[#229f2a] hover:border-black font-bold text-[#229f2a] hover:text-black'
                     onClick={() =>{
-                      callLoginService({email: email, password: password});
                     }}
                   >
                     登入
@@ -83,28 +82,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className='flex justify-center bg-[#ffffff] basis-1/5'>
-        <div className='flex w-full flex-row justify-around items-center text-[#0050a2] text-[0.875rem]'>
-          <div className='flex flex-col'>
-            <h3 className='text-[14px] font-medium text-black'>Social media</h3>
-            <a>YouTube</a>
-            <a>Facebook</a>
-            <a>Instagram</a>
-            <a>Twitter</a>
-          </div>
-          <div className='flex flex-col'>
-            <h3 className='text-[14px] font-medium text-black'>Resources</h3>
-            <a>常見問答</a>
-            <a>使用條款</a>
-            <a>隱私權政策</a>
-          </div>
-          <div className='flex flex-col'>
-            <h3 className='text-[14px] font-medium text-black'>About</h3>
-            <a>關於我們</a>
-            <a className='mt-[10px] text-[#525252] text-[0.75rem]'>©Henry股份有限公司</a>
-          </div>
-        </div>
-      </div>
+      <About/>
     </div>
   )
 }

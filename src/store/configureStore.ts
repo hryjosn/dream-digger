@@ -6,7 +6,7 @@ import userApiReducer, { userApi } from '../apiSlice/userApi/userApiSlice';
 
 export const store = configureStore({
     reducer: {
-        userAccount: LoginReducer,
+        loginPageState: LoginReducer,
         userApi: userApiReducer,
     },
     middleware: (getDefaultMiddleware) =>

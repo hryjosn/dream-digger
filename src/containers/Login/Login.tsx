@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../store/configureStore';
-import { getEmail, getPassword } from '../../slice/login/loginSlice';
+import { getEmail, getPassword, setErrorMsg } from '../../slice/login/loginSlice';
 import { Input } from '../../components/Input/Input';
 import { useLoginApiMutation } from '../../apiSlice/userApi/userApiSlice';
 
 const Login = () => {
-  const [showErrorMsg, setShowErrorMsg] = useState(false);
-  const email: string = String(useAppSelector(state => state.userAccount.email));
-  const password: string = String(useAppSelector(state => state.userAccount.password));
+  const email: string = useAppSelector(state => state.loginPageState.params.email);
+  const password: string = useAppSelector(state => state.loginPageState.params.password);
+  const errorMsg: string = useAppSelector(state => state.loginPageState.errorMsg);
   const dispatch = useAppDispatch();
   const [ trigger ] = useLoginApiMutation();
+
   const loginHandler = async () => {
     try{
       if(email && password){
@@ -17,10 +18,12 @@ const Login = () => {
         if(result){
           localStorage.setItem('token', result.token);
         }
+      } else {
+        dispatch(setErrorMsg('請填寫Email或密碼'))
       }
     }catch(error){
       if(error){
-        setShowErrorMsg(true);
+        dispatch(setErrorMsg('Email或密碼是無效的'))
       }
     }
   }
@@ -34,14 +37,14 @@ const Login = () => {
             </p>
           </div>
         </div>
-        <form className='flex flex-col w-[87%] basis-1/2 bg-[#ffffff] justify-center'>
+        <div className='flex flex-col w-[87%] basis-1/2 bg-[#ffffff] justify-center'>
           <div className='flex flex-col h-auto w-[87%] self-center'>
-            {showErrorMsg ? 
+            {errorMsg ? 
               (<div className='flex justify-between border-b mb-8 pb-4 text-[#C45059] border-[#C45059]'>
-                <p>Email或密碼是無效的</p>
+                <p>{errorMsg}</p>
                 <button 
                   onClick={() => {
-                    setShowErrorMsg(false)
+                    dispatch(setErrorMsg(''));
                   }}
                 >
                   ×
@@ -83,9 +86,11 @@ const Login = () => {
                     dispatch(getPassword(e.target.value))
                   }}
                   required={true}
+                  autoComplete='on'
                 />
                 <div className='flex mt-[1.5rem]'>
                   <button 
+                    type='submit'
                     className='h-[42px] w-[84px] mr-[20px] rounded-md border-solid border border-[#229f2a] hover:border-black font-bold text-[#229f2a] hover:text-black'
                     onClick={() =>{
                       loginHandler();
@@ -112,7 +117,7 @@ const Login = () => {
             </a>
           </div>
           </div>
-        </form>
+        </div>
       </div>
       <div className='flex justify-center bg-[#ffffff] basis-1/5'>
         <div className='flex w-full flex-row justify-around items-center text-[#0050a2] text-[0.875rem]'>

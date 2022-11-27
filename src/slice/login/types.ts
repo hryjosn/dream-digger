@@ -1,4 +1,7 @@
 export type UserAccountType = {
-    email: string,
-    password: string,
+    params: {
+        email: string,
+        password: string,
+    },
+    errorMsg: string,
 }

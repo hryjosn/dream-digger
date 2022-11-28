@@ -106,7 +106,7 @@ const SignUp = () => {
                             htmlFor='password'
                             className='text-[14px] mb-[5px] font-semibold'
                         >
-                            密碼 ( 至少六碼 )
+                            密碼 ( 至少八碼 )
                         </label>
                         <input 
                             type='password'

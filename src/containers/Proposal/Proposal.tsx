@@ -5,7 +5,7 @@ import AnnouncementIcon from '@mui/icons-material/Announcement';
 
 const Proposal = () => {
   return (
-    <div className='flex flex-col h-[108vh] items-center'>
+    <div className='flex flex-col items-center'>
         <Header/>
         <div className='w-full flex flex-col justify-center items-center mb-[4rem]'>
             <h2 className='text-[1.5rem] font-bold mt-[2rem] mb-[2rem]'>選擇題案類別</h2>

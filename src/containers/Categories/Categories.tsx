@@ -36,12 +36,18 @@ const Categories = () => {
         </div>
       </header>
       <div className='flex justify-center mt-[2px]'>
-        <div className='flex justify-start h-[100px]'>
-          <div className='flex justify-start'>
-            search
-          </div>
+        <div className='w-[500px]'>
           <div className=''>
-            search
+            <div>
+              search
+            </div>
+          </div>
+        </div>
+        <div className='w-[500px]'>
+          <div>
+            <div className=''>
+              search
+            </div>
           </div>
         </div>
       </div>

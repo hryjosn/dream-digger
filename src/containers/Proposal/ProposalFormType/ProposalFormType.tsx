@@ -2,35 +2,30 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Header from '../../../components/Header/Header';
 import About from '../../../components/About/About';
+import TextField from '@mui/material/TextField';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import Stack from '@mui/material/Stack';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import YearSelector from '../../../components/Proposal/DateSelector/YearSelector';
 import MonthSelector from '../../../components/Proposal/DateSelector/MonthSelector';
-import DaySelector from '../../../components/Proposal/DateSelector/DaySelector';
-import HourSelector from '../../../components/Proposal/DateSelector/HourSelector';
-import MinuteSelector from '../../../components/Proposal/DateSelector/MinuteSelector';
 import CategorySelector from '../../../components/Proposal/CategorySelector/CategorySelector';
 import { useAppSelector, useAppDispatch } from '../../../store/configureStore';
 import {
   getProposalType,
-  getStartYear, 
-  getStartMonth, 
-  getStartDay, 
-  getStartHour, 
-  getStartMinute,
-  getEndYear,
-  getEndMonth,
-  getEndDay,
-  getEndHour,
-  getEndMinute,
+  getStartTime,
+  getEndTime,
 } from '../../../slice/proposal/proposalSlice';
+import moment from 'moment';
 
 const ProposalType = () => {
   const router = useRouter();
   const { proposalType } = router.query;
-  const startTimeState = useAppSelector(state => state.proposalData.params.startTime);
-  const endTimeState = useAppSelector(state => state.proposalData.params.endTime);
-  const proposalTypeState = useAppSelector(state => state.proposalData.params.proposalType);
+  const startTimeState = useAppSelector(state => state.proposalData.params.start_time);
+  const endTimeState = useAppSelector(state => state.proposalData.params.end_time);
+  const proposalTypeState = useAppSelector(state => state.proposalData.params.proposal_type);
   const dispatch = useAppDispatch();
-  
+
   useEffect(() => {
     switch(proposalType){
       case 'crowdfunding': {
@@ -47,6 +42,7 @@ const ProposalType = () => {
       }
     }
   });
+
   return (
     <div className='flex flex-col items-center'>
       <Header/>
@@ -80,30 +76,17 @@ const ProposalType = () => {
           </p>
           <label className='font-bold'>預計開始時間</label>
           <div className='flex flex-row items-center justify-left mt-[5px] mb-[1rem]'>
-            <YearSelector 
-              value={startTimeState.year}
-              onChange={e => dispatch(getStartYear(e.target.value))}
-            />
-            <div className='ml-[7px] mr-[7px] font-bold'>-</div>
-            <MonthSelector 
-              value={startTimeState.month}
-              onChange={e => dispatch(getStartMonth(e.target.value))}
-            />
-            <div className='ml-[7px] mr-[7px] font-bold'>-</div>
-            <DaySelector 
-              value={startTimeState.day}
-              onChange={e => dispatch(getStartDay(e.target.value))}
-            />
-            <div className='ml-[7px] mr-[7px] font-bold w-[15px]'>-</div>
-            <HourSelector
-              value={startTimeState.hour}
-              onChange={e => dispatch(getStartHour(e.target.value))}
-            />
-            <div className='font-bold w-[15px]'>：</div>
-            <MinuteSelector
-              value={startTimeState.minute}
-              onChange={e => dispatch(getStartMinute(e.target.value))}
-            />
+            <LocalizationProvider dateAdapter={AdapterMoment}>
+              <Stack spacing={3} sx={{ width: 300 }}>
+                <DateTimePicker
+                  renderInput={(params) => <TextField {...params} />}
+                  value={startTimeState}
+                  onChange={(value) => {
+                    dispatch(getStartTime(moment(value).toISOString()))
+                  }}
+                />
+              </Stack>
+            </LocalizationProvider>
           </div>
           <p className='mb-[1rem] text-xs text-neutral-600'>
             告訴我們你希望什麼時候開始你的計畫，我們將會為你安排審核順序。至少需要約十個工作天審核你的提案。
@@ -113,30 +96,17 @@ const ProposalType = () => {
             (<div>
               <label className='font-bold'>預計結束時間</label>
               <div className='flex flex-row items-center justify-left mt-[5px] mb-[11px]'>
-                <YearSelector 
-                  value={endTimeState.year}
-                  onChange={e => dispatch(getEndYear(e.target.value))}
-                />
-                <div className='mx-[7px] font-bold'>-</div>
-                <MonthSelector 
-                  value={endTimeState.month}
-                  onChange={e => dispatch(getEndMonth(e.target.value))}
-                />
-                <div className='mx-[7px] font-bold'>-</div>
-                <DaySelector 
-                  value={endTimeState.day}
-                  onChange={e => dispatch(getEndDay(e.target.value))}
-                />
-                <div className='mx-[7px] font-bold w-[15px]'>-</div>
-                <HourSelector
-                  value={endTimeState.hour}
-                  onChange={e => dispatch(getEndHour(e.target.value))}
-                />
-                <div className='font-bold w-[15px]'>：</div>
-                <MinuteSelector
-                  value={endTimeState.minute}
-                  onChange={e => dispatch(getEndMinute(e.target.value))}
-                />
+                <LocalizationProvider dateAdapter={AdapterMoment}>
+                  <Stack spacing={3}  sx={{ width: 300 }}>
+                    <DateTimePicker
+                      renderInput={(params) => <TextField {...params} />}
+                      value={endTimeState}
+                      onChange={(value) => {
+                        dispatch(getEndTime(moment(value).toISOString()))
+                      }}
+                    />
+                  </Stack>
+                </LocalizationProvider>
               </div>
               <p className='mb-[1rem] mt-[0.25rem] text-xs text-neutral-600'>
                 計畫時間建議為期在 60 天內。

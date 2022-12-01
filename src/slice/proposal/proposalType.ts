@@ -1,41 +1,30 @@
 export type proposalDataStates = {
     params: {
-        proposalType: string,
+        proposal_type: string,
         name: string,
         email: string,
-        startTime: {
-            year: string,
-            month: string,
-            day: string,
-            hour: string,
-            minute: string,
-        },
-        endTime: {
-            year: string,
-            month: string,
-            day: string,
-            hour: string,
-            minute: string,
-        },
-        targetAmount: string,
+        start_time: string,
+        end_time: string,
+        target_amount: string,
         category: string,
-        planName: string,
-        planSummary: string,
-        coverPhoto: string,
-        planIntroduction: string,
-        rewardChoiceListType: {
-            theFirstOfReward: {
+        plan_name: string,
+        plan_summary: string,
+        cover_photo: string,
+        plan_introduction: string,
+        reward_choice_list_type: {
+            the_first_of_reward: {
                 ammount: string,
                 introduction: string,
                 implementTime: string,
             },
-            theSecondOfReward: {
+            the_second_of_reward: {
                 ammonut: string,
                 introduction: string,
                 implementTime: string,
             }
         },
-        webLink: string,
-        videoLink: string,
+        web_link: string,
+        video_link: string,
     },
+    monthList: Array<string>
 };

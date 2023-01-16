@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import signup from '../../../pages/signup';
+import { setErrorMsg } from '../../slice/SignUp/SignUpSlice';
 import { UserAccountType, responseType, SingUpDataType } from './types';
-
+import { valueSchema } from './validation';
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({ baseUrl: process.env.API_URL }),
@@ -18,7 +18,22 @@ export const userApi = createApi({
         url: './signup',
         method: 'POST',
         body: signupData,
-      })
+      }),
+      async onQueryStarted(arg,{dispatch,queryFulfilled}){
+        valueSchema.validate(arg)
+        .then(async () =>{
+          queryFulfilled.then((data) =>{
+            localStorage.setItem('token', data.data.token)
+            return './main'
+          })
+          .catch((error) =>{
+            dispatch(setErrorMsg(error))
+          })
+        })
+        .catch((error) =>{
+          dispatch(setErrorMsg(error))
+        })
+      }
     })
   }),
 });

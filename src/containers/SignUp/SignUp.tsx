@@ -11,21 +11,9 @@ const SignUp = () => {
     const errorMessage = (useAppSelector(state => state.SignUpData.setErrorMsg))
     const dispatch = useAppDispatch();
     const [ trigger ] = useSignUpApiMutation()
-    /*const signUpHandler = async() =>{
-        try {
-            if(name || email || password || checkPassword){
-                if (password == checkPassword){
-                    const result = await trigger({name, email, password}).unwrap();
-                }else{
-                    dispatch(setErrorMsg('確認密碼錯誤'))
-                }
-            }else{
-                dispatch(setErrorMsg('請填入完整資料'))
-            }
-        } catch (error) {
-            dispatch(setErrorMsg(error.message))
-        }
-    }*/
+    const signUpHandler = async() =>{
+        const result = await trigger({name, email, password}).unwrap();
+    }
   return (
     <div className=''>
         <div className='flex'>

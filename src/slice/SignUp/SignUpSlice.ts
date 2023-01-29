@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction, SliceCaseReducers, ValidateSliceCaseReducers} from "@reduxjs/toolkit";
+import { string } from "yup";
 import { SignUpType } from './SignUpType'
 
 
@@ -12,7 +13,19 @@ const initialState: SignUpType<T> ={
     setErrorMsg: '',
 }
 
-export const SignSlice  = createSlice({
+export const SignSlice  = <
+    T,
+    Reducers extends SliceCaseReducers<SignUpType<T>>
+>({
+    name = '',
+    initialState,
+    reducers,
+}: {
+    name: string
+    initialState: SignUpType<T>
+    reducers: ValidateSliceCaseReducers<SignUpType<T>, Reducers>
+}) => { 
+    return createSlice({
         name: 'sign',
         initialState,
         reducers:{
@@ -31,8 +44,10 @@ export const SignSlice  = createSlice({
             setErrorMsg(state: SignUpType<T>, action: PayloadAction<T>) {
                 state.setErrorMsg = action.payload;
             },
+            ...reducers,
         },
-})
+    })
+}
 
 export const { getSignUpName, getSignUpEmail, getSignUpPassword, verifyPassword, setErrorMsg} = SignSlice.actions;
-export default SignSlice.reducer
+export default SignSlice.reducers

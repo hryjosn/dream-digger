@@ -1,13 +1,7 @@
 import { createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { SignUpType } from './SignUpType'
 
-type SignUpState = {
-    name: string,
-    email: string,
-    password: string,
-    verifyPassword: string,
-}
-
-export const initialState: SignUpState = {
+export const initialState: SignUpType = {
     name:'',
     email:'',
     password:'',

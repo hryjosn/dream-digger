@@ -33,7 +33,6 @@ const Categories = () => {
         </div>
       </div>
       <div className='flex justify-center'>
-        page
       </div>
       <About/>
     </div>

@@ -1,9 +1,9 @@
-export type SignUpType<T> = {
+export type SignUpType = {
     params: {
-        name: T,
-        email: T,
-        password: T,  
+        name: string,
+        email: string,
+        password: string,  
     },
-    verifyPassword: T,
-    setErrorMsg: T,
+    verifyPassword: string,
+    setErrorMsg: string,
 }

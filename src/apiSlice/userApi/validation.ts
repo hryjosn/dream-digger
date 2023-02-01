@@ -1,8 +1,8 @@
 import * as Yup from 'yup';
 
 export const valueSchema = Yup.object({
-    name: Yup.string()
-        .required('請填入完整資料'),
+    name: Yup.string().
+        required('請填入完整資料'),
     email: Yup.string().
         required('請填入完整資料').
         email('email格式錯誤'),

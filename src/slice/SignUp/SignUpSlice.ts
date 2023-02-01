@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction, SliceCaseReducers, ValidateSliceCaseReducers} from "@reduxjs/toolkit";
-import { string } from "yup";
 import { SignUpType } from './SignUpType'
 
 
-const initialState: SignUpType<T> ={
+const initialState: SignUpType ={
     params: {
         name: '',
         email: '',
@@ -17,19 +16,19 @@ export const SignSlice  =  createSlice({
     name: 'sign',
     initialState,
     reducers:{
-        getSignUpName:(state, action: PayloadAction<T>) => {
+        getSignUpName:(state, action: PayloadAction<string>) => {
             state.params.name = action.payload
         },
-        getSignUpEmail(state, action: PayloadAction<T>) {
+        getSignUpEmail(state, action: PayloadAction<string>) {
             state.params.email = action.payload
         },
-        getSignUpPassword(state, action: PayloadAction<T>) {
+        getSignUpPassword(state, action: PayloadAction<string>) {
             state.params.password = action.payload
         },
-        verifyPassword(state, action: PayloadAction<T>) {
+        verifyPassword(state, action: PayloadAction<string>) {
             state.verifyPassword = action.payload
         },
-        setErrorMsg(state, action: PayloadAction<T>) {
+        setErrorMsg(state, action: PayloadAction<string>) {
             state.setErrorMsg = action.payload;
         },
     },

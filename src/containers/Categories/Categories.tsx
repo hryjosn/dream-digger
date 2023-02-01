@@ -2,9 +2,9 @@ import React from 'react'
 import  Header from '../../components/Header'
 import About from '../../components/About'
 import ProjectIntroduction from '../../components/categories/ProjectIntroduction'
-import NatureSelector from '../../components/categories/natureSelector'
-import ThemeSelector from '../../components/categories/themeSelector'
-import OrderSelector from '../../components/categories/orderSelector'
+import NatureSelector from '../../components/categories/NatureSelector'
+import ThemeSelector from '../../components/categories/ThemeSelector'
+import OrderSelector from '../../components/categories/OrderSelector'
 
 const Categories = () => {
   return (

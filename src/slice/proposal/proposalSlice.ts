@@ -36,17 +36,15 @@ const initialState: proposalDataTypes  = {
         cover_photo: '',
         plan_introduction: '',
         //there's two reward options that plan owner should offer
-        reward_choice_list_type: {
-            the_first_of_reward: {
-                ammount: '',
-                introduction: '',
-                implementTime: '',
-            },
-            the_second_of_reward: {
-                ammonut: '',
-                introduction: '',
-                implementTime: '',
-            }
+        the_first_of_reward: {
+            ammount: '',
+            introduction: '',
+            implementTime: moment().format('YYYY-MM'),
+        },
+        the_second_of_reward: {
+            ammount: '',
+            introduction: '',
+            implementTime: moment().format('YYYY-MM'),
         },
         web_link: '',
         video_link: '',
@@ -72,7 +70,8 @@ const proposalSlice = createSlice({
                 plan_summary,
                 cover_photo,
                 plan_introduction,
-                reward_choice_list_type,
+                the_first_of_reward,
+                the_second_of_reward,
                 web_link,
                 video_link,
                 terms_accepted,
@@ -87,7 +86,12 @@ const proposalSlice = createSlice({
             state.params.plan_summary = plan_summary;
             state.params.cover_photo = cover_photo;
             state.params.plan_introduction = plan_introduction;
-            state.params.reward_choice_list_type = reward_choice_list_type;
+            state.params.the_first_of_reward.ammount = the_first_of_reward.ammount;
+            state.params.the_first_of_reward.introduction = the_first_of_reward.introduction;
+            state.params.the_first_of_reward.implementTime = the_first_of_reward.implementTime;
+            state.params.the_second_of_reward.ammount = the_second_of_reward.ammount;
+            state.params.the_second_of_reward.introduction = the_second_of_reward.introduction;
+            state.params.the_second_of_reward.implementTime = the_second_of_reward.implementTime;
             state.params.web_link = web_link;
             state.params.video_link = video_link;
             state.params.terms_accepted = terms_accepted;

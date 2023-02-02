@@ -18,6 +18,8 @@ import moment from 'moment';
 
 const ProposalType = () => {
   const router = useRouter();
+  const [yearOfImplementTime, setYearOfImplementTime] = useState<string>(new Date().getFullYear().toString());
+  const [monthOfImplementTime, setMonthOfImplementTime] = useState<string>('一月');
   const { proposalType } = router.query;
   const proposalState = useAppSelector(state => state.proposalData.params);
   const dispatch = useAppDispatch();
@@ -178,9 +180,9 @@ const ProposalType = () => {
             <input 
               className='border h-[34px] w-[209px] pb-[3px] pt-[3px] pl-[0.5rem] mb-[0.5rem]'
               type='text'
-              value={proposalState.reward_choice_list_type.the_first_of_reward.ammount}
+              value={proposalState.the_first_of_reward.ammount}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                dispatch(getProposalData({params: {...proposalState, plan_name: e.target.value}}))
+                dispatch(getProposalData({params: {...proposalState, the_first_of_reward: {...proposalState.the_first_of_reward, ammount: e.target.value}}}))
               }}
             />
             {proposalState.proposal_type === '訂閱式專案' ?
@@ -190,6 +192,10 @@ const ProposalType = () => {
           <label className='font-bold mb-[5px]'>回饋選項內容說明（一）</label>
           <textarea
             className='border px-[0.5rem] py-1 mb-2 overflow-visible'
+            value={proposalState.the_first_of_reward.introduction}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+              dispatch(getProposalData({params: {...proposalState, the_first_of_reward: {...proposalState.the_first_of_reward, introduction: e.target.value}}}))
+            }}
           />
           <p className='mt-2 text-xs text-neutral-600'>
             僅供審核，之後可增加、刪減、或修改。
@@ -199,17 +205,31 @@ const ProposalType = () => {
             <div className='mt-[1rem]'>
               <label className='font-bold mb-[5px]'>回饋預計實現時間（一）</label>
               <div className='flex flex-row items-center mb-[1rem]'>
-                <YearSelector/>
-                <div className='mx-[7px] font-bold'>-</div>
-                <MonthSelector/>
+                <LocalizationProvider dateAdapter={AdapterMoment}>
+                    <Stack spacing={3}  sx={{ width: 300 }}>
+                      <DateTimePicker
+                        inputFormat='YYYY-MM'
+                        views={['year', 'month']}
+                        renderInput={(params) => <TextField {...params} />}
+                        value={proposalState.the_first_of_reward.implementTime}
+                        onChange={(value) => {
+                          dispatch(getProposalData({params: {...proposalState, the_first_of_reward: {...proposalState.the_first_of_reward, implementTime: moment(value).format('YYYY-MM')}}}))
+                        }}
+                      />
+                    </Stack>
+                  </LocalizationProvider>
               </div>
             </div>
           }
           <label className='font-bold mt-[1rem] mb-[5px]'>回饋選項金額（二）</label>
           <div>
             <input 
-            className='border h-[34px] w-[209px] pb-[3px] pt-[3px] pl-[0.5rem] mb-[0.5rem]'
-            type='text'
+              className='border h-[34px] w-[209px] pb-[3px] pt-[3px] pl-[0.5rem] mb-[0.5rem]'
+              type='text'
+              value={proposalState.the_second_of_reward.ammount}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                dispatch(getProposalData({params: {...proposalState, the_second_of_reward: {...proposalState.the_second_of_reward, ammount: e.target.value}}}))
+              }}
             />
             {proposalState.proposal_type === '訂閱式專案' ?
               <span className='ml-[5px]'>/ 月</span> : null
@@ -218,6 +238,10 @@ const ProposalType = () => {
           <label className='font-bold mb-[5px]'>回饋選項內容說明（二）</label>
           <textarea
             className='border px-[0.5rem] py-1 mb-2 overflow-visible'
+            value={proposalState.the_second_of_reward.introduction}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+              dispatch(getProposalData({params: {...proposalState, the_second_of_reward: {...proposalState.the_second_of_reward, introduction: e.target.value}}}))
+            }}
           />
           <p className='mt-2 text-xs text-neutral-600'>
             僅供審核，之後可增加、刪減、或修改。
@@ -227,9 +251,19 @@ const ProposalType = () => {
             <div className='mt-[1rem]'>
               <label className='font-bold mb-[5px]'>回饋預計實現時間（二）</label>
               <div className='flex flex-row items-center mb-[1rem]'>
-                <YearSelector/>
-                <div className='mx-[7px] font-bold'>-</div>
-                <MonthSelector/>
+                <LocalizationProvider dateAdapter={AdapterMoment}>
+                  <Stack spacing={3}  sx={{ width: 300 }}>
+                    <DateTimePicker
+                      inputFormat='YYYY-MM'
+                      views={['year', 'month']}
+                      renderInput={(params) => <TextField {...params} />}
+                      value={proposalState.the_second_of_reward.implementTime}
+                      onChange={(value) => {
+                        dispatch(getProposalData({params: {...proposalState, the_second_of_reward: {...proposalState.the_second_of_reward, implementTime: moment(value).format('YYYY-MM')}}}))
+                      }}
+                    />
+                  </Stack>
+                </LocalizationProvider>
               </div>
             </div>
           }

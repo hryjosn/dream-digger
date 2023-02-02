@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { setErrorMsg } from '../../slice/SignUp/SignUpSlice';
-import { UserAccountType, responseType, SingUpDataType } from './types';
+import { UserAccountType, responseType, SingUpDataType, userData, getUserByToken } from './types';
 import { valueSchema } from './validation';
 export const userApi = createApi({
   reducerPath: 'userApi',
@@ -15,28 +15,36 @@ export const userApi = createApi({
     }),
     signUpApi: builder.mutation<responseType, SingUpDataType>({
       query: (signupData) => ({
-        url: './signup',
+        url: '/signup',
         method: 'POST',
         body: signupData,
       }),
       async onQueryStarted(arg,{dispatch,queryFulfilled}){
         valueSchema.validate(arg)
         .then(async () =>{
-          queryFulfilled.then((data) =>{
+          queryFulfilled.then((data) => {
             localStorage.setItem('token', data.data.token)
-            return './main'
           })
           .catch((error) =>{
-            dispatch(setErrorMsg(error))
+            dispatch(setErrorMsg(error.error.data))
           })
         })
         .catch((error) =>{
-          dispatch(setErrorMsg(error))
+          dispatch(setErrorMsg(error.message))
         })
       }
+    }),
+    getUserApi: builder.query<userData, getUserByToken>({
+      query: () => ({
+        url: '/getuser',
+      })
     })
   }),
 });
 
-export const { useUserLoginServiceMutation, useSignUpApiMutation } = userApi;
+export const { 
+  useUserLoginServiceMutation, 
+  useSignUpApiMutation,
+  useLazyGetUserApiQuery,
+} = userApi;
 export default userApi.reducer;

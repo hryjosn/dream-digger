@@ -2,7 +2,7 @@ import React from 'react'
 const ThemeSelector = () => {
   return (
     <select className=''>
-        <option>選擇計畫分類</option>
+        <option>主題分類</option>
         <option>音樂</option>
         <option>攝影</option>
         <option>出版</option>

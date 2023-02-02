@@ -10,5 +10,4 @@ export const valueSchema = Yup.object({
         required('請填入完整資料').
         min(8).
         max(16),
-    verifyPassword: Yup.string().required('請填入驗證密碼')
 })

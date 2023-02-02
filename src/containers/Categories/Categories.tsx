@@ -28,7 +28,7 @@ const Categories = () => {
         </div>
       </div>
       <div className='flex justify-center'>
-        <div className='flex'>
+        <div className='flex h-[500px]'>
           <ProjectIntroduction/>
         </div>
       </div>

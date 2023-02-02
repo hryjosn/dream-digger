@@ -1,18 +1,16 @@
 import React, {useEffect , useState } from 'react'
+import { useRouter } from 'next/router'
 
 const Header = (props: JSX.IntrinsicAttributes & React.ClassAttributes<HTMLInputElement> & React.InputHTMLAttributes<HTMLInputElement>) => {
 
-  const [login, setlogin] = useState<{item: string | null }>({
-    item: '',
-  });
+  const [isLogin, setIsLogin] = useState(false)
   
   useEffect(() => {
-    const item = localStorage.getItem('token')
-    setlogin({item})
+    if(localStorage.getItem('token')){
+      setIsLogin(true)
+    }
   },[])
-
   return (
-
     <header className='flex justify-center'>
       <div className='flex items-center h-[70px] w-[500px] space-x-6'>
         <a href='./' className='flex items-center text-[14px] font-bold w-[113px] h-[28px] border-r-[1px]'>
@@ -29,7 +27,7 @@ const Header = (props: JSX.IntrinsicAttributes & React.ClassAttributes<HTMLInput
           </a>
         </div>
       </div>
-      {login ? (
+      {isLogin ? (
         <div className='flex items-center h-[70px] w-[500px] justify-end space-x-1'>
           <a>
             <input type='image' className='h-[11px] w-[15px] mr-[25px]' src='/images/message.jpg'/>

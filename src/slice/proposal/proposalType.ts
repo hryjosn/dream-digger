@@ -1,4 +1,4 @@
-export type proposalDataStates = {
+export type proposalDataTypes = {
     params: {
         proposal_type: string,
         name: string,
@@ -25,6 +25,9 @@ export type proposalDataStates = {
         },
         web_link: string,
         video_link: string,
+        terms_accepted: boolean,
+        terms_acknowledged: boolean,
     },
-    monthList: Array<string>
+    monthList?: Array<string>,
+    categoryList?: Array<string>
 };

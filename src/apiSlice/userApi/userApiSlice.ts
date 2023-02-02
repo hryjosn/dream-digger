@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { LoginType, responseType, SingUpDataType } from './types';
+import { loginSchema } from './validation'
+import { setErrorMsg } from '../../slice/login/loginSlice';
 
 export const userApi = createApi({
   reducerPath: 'userApi',
@@ -11,6 +13,20 @@ export const userApi = createApi({
         method: 'POST',
         body: userAccount,
       }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        loginSchema.validate(arg)
+          .then(async () => {
+            queryFulfilled.then((data) => {
+              localStorage.setItem('token', data.data.token);
+            })
+            .catch((err) => {
+              dispatch(setErrorMsg(err.error.data));
+            })
+          })
+          .catch((err) => {
+            dispatch(setErrorMsg(err.message));
+          });
+      },
     }),
     signUpApi: builder.mutation<responseType, SingUpDataType>({
       query: (signupData) => ({

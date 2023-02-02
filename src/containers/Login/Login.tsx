@@ -1,32 +1,18 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '../../store/configureStore';
-import { getEmail, getPassword, setErrorMsg } from '../../slice/login/loginSlice';
+import { getUserAccount, setErrorMsg } from '../../slice/login/loginSlice';
 import { Input } from '../../components/Input/Input';
 import About from '../../components/About/About';
 import { useLoginApiMutation } from '../../apiSlice/userApi/userApiSlice';
 
 const Login = () => {
-  const email: string = useAppSelector(state => state.loginPageState.params.email);
-  const password: string = useAppSelector(state => state.loginPageState.params.password);
-  const errorMsg: string = useAppSelector(state => state.loginPageState.errorMsg);
+  const accountState = useAppSelector(state => state.loginPageState.params);
+  const errorMsg = useAppSelector(state => state.loginPageState.errorMsg);
   const dispatch = useAppDispatch();
   const [ trigger ] = useLoginApiMutation();
 
   const loginHandler = async () => {
-    try{
-      if(email && password){
-        const result = await trigger({email, password}).unwrap();
-        if(result){
-          localStorage.setItem('token', result.token);
-        }
-      } else {
-        dispatch(setErrorMsg('請填寫Email或密碼'))
-      }
-    }catch(error){
-      if(error){
-        dispatch(setErrorMsg('Email或密碼是無效的'))
-      }
-    }
+    const result = await trigger({email: accountState.email, password: accountState.password}).unwrap();
   }
   return (
     <div className='flex flex-col h-[108vh] overflow-y-auto bg-[#f4f4f5]'>
@@ -71,9 +57,9 @@ const Login = () => {
                 </p>
                 <Input 
                   type='email'
-                  value={email}
-                  onChange={e => {
-                    dispatch(getEmail(e.target.value))
+                  value={accountState.email}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    dispatch(getUserAccount({params: { ...accountState, email: e.target.value}}))
                   }}
                   required={true}
                 />
@@ -82,9 +68,9 @@ const Login = () => {
                 </p>
                 <Input 
                   type='password'
-                  value={password} 
-                  onChange={e => {
-                    dispatch(getPassword(e.target.value))
+                  value={accountState.password} 
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    dispatch(getUserAccount({params: { ...accountState, password: e.target.value}}))
                   }}
                   required={true}
                   autoComplete='on'

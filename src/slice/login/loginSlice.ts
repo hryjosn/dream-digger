@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserAccountType } from "./types";
+import { UserAccountType } from './loginType';
 
 const initialState: UserAccountType = {
     params: {
@@ -13,11 +13,10 @@ const loginSlice = createSlice({
     name: 'userAccount',
     initialState,
     reducers: {
-        getEmail: (state, action: PayloadAction<string>) => {
-            state.params.email = action.payload;
-        },
-        getPassword: (state, action: PayloadAction<string>) => {
-            state.params.password = action.payload;
+        getUserAccount: (state, action: PayloadAction<UserAccountType>) => {
+            const { email, password } = action.payload.params;
+            state.params.email = email;
+            state.params.password = password;
         },
         setErrorMsg: (state, action: PayloadAction<string>) => {
             state.errorMsg = action.payload;
@@ -25,5 +24,5 @@ const loginSlice = createSlice({
     }
 });
 
-export const { getEmail, getPassword, setErrorMsg } = loginSlice.actions;
+export const { getUserAccount, setErrorMsg} = loginSlice.actions;
 export default loginSlice.reducer

@@ -1,4 +1,7 @@
-export type UserAccountStates = {
-    email: String,
-    password: String,
-};
+export type UserAccountType = {
+    params: {
+        email: string,
+        password: string,
+    },
+    errorMsg?: string,
+}

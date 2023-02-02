@@ -1,16 +1,14 @@
 import React, {useEffect , useState } from 'react'
 
-const Header = () => {
+const Header = (props: JSX.IntrinsicAttributes & React.ClassAttributes<HTMLInputElement> & React.InputHTMLAttributes<HTMLInputElement>) => {
 
-  const [login, setlogin] = useState<{item: string}>({
+  const [login, setlogin] = useState<{item: string | null }>({
     item: '',
   });
   
   useEffect(() => {
-      const item = localStorage.getItem('token')
-      if(item){
-        setlogin({item})
-      }
+    const item = localStorage.getItem('token')
+    setlogin({item})
   },[])
 
   return (

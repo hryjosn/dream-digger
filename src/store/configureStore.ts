@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import SignSlice from "../slice/SignUp/SignUpSlice";
+import LoginReducer from '../slice/login/loginSlice';
+import ProposalReducer from '../slice/proposal/proposalSlice';
 
 export const store = configureStore({
     reducer: {
+        userAccount: LoginReducer,
+        proposalData: ProposalReducer,
         SignUpData: SignSlice,
     }
 })
@@ -12,4 +16,4 @@ export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

@@ -56,7 +56,7 @@ const About = () => {
             </div>
         </footer>
         <div className='flex justify-center h-[135px]'>
-            <p className='mt-[35px] text-[13px] text-[#5B5B5B]'>@史萊姆工作室</p>
+            <p className='mt-[35px] text-[13px] text-[#5B5B5B]'>@工作室</p>
         </div>
     </div>
    

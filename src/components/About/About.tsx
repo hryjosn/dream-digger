@@ -2,29 +2,64 @@ import React from 'react'
 
 const About = () => {
   return (
-    <div className='flex justify-center bg-[#ffffff] basis-1/5 border-t pt-16 pb-[8rem]'>
-        <div className='flex w-[1365px] flex-row justify-around items-center text-[#0050a2] text-[0.875rem]'>
-          <div className='flex flex-col'>
-            <h3 className='text-[14px] font-medium text-black'>Social media</h3>
-            <a>YouTube</a>
-            <a>Facebook</a>
-            <a>Instagram</a>
-            <a>Twitter</a>
-          </div>
-          <div className='flex flex-col'>
-            <h3 className='text-[14px] font-medium text-black'>Resources</h3>
-            <a>常見問答</a>
-            <a>使用條款</a>
-            <a>隱私權政策</a>
-          </div>
-          <div className='flex flex-col'>
-            <h3 className='text-[14px] font-medium text-black'>About</h3>
-            <a>關於我們</a>
-            <a className='mt-[10px] text-[#525252] text-[0.75rem]'>©Henry股份有限公司</a>
-          </div>
+    <div>
+        <footer className='flex justify-center border-y-[0.5px] h-[255px]'>
+            <div className='flex mt-[80px] space-x-[150px]'>
+              <div className='flex items-center h-[90px]'>
+                <p className='font-bold'>DREAM DIGGER</p>
+              </div>
+              <div className='flex flex-col text-[14px] space-y-[10px]'>
+                <p className=''/>幫助
+                <a href=''
+                   className='text-[#5B5B5B] hover:text-[#000093]'>
+                  常見問題
+                </a>
+                <a href=''
+                   className='text-[#5B5B5B] hover:text-[#000093]'>
+                  使用條款
+                </a>
+                <a href=''
+                   className='text-[#5B5B5B] hover:text-[#000093]'>
+                  隱私權政策
+                </a>
+              </div>
+              <div className='flex flex-col text-[14px] space-y-[10px]'>
+                <p className=''/>關於
+                <a href=''
+                   className='text-[#5B5B5B] hover:text-[#000093]'>
+                  關於我們
+                </a>
+                <a href=''
+                   className='text-[#5B5B5B] hover:text-[#000093]'>
+                  商標資源
+                </a>
+              </div>
+              <div className='flex flex-col text-[14px] space-y-[10px]'>
+                <p className=''/>社群
+                <a href=''
+                   className='text-[#5B5B5B] hover:text-[#FF0000]'>
+                  YouTube
+                </a>
+                <a href=''
+                   className='text-[#5B5B5B] hover:text-[#00DB00]'>
+                  LINE
+                </a>
+                <a href=''
+                   className='text-[#5B5B5B] hover:text-[#2828FF]'>
+                  Facebook
+                </a>
+                <a href=''
+                   className='text-[#5B5B5B] hover:text-[#46A3FF]'>
+                  Twitter
+                </a>
+              </div>
+            </div>
+        </footer>
+        <div className='flex justify-center h-[135px]'>
+            <p className='mt-[35px] text-[13px] text-[#5B5B5B]'>@工作室</p>
         </div>
-      </div>
+    </div>
+   
   )
 }
-
-export default About;
+export default About

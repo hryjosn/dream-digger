@@ -6,5 +6,4 @@ export type SignUpType = {
     },
     verifyPassword: string,
     setErrorMsg: string,
-    
 }

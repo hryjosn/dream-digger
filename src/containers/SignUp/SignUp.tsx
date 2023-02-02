@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../store/configureStore';
 import { getSignUpName, getSignUpEmail,  getSignUpPassword, verifyPassword, setErrorMsg } from '../../slice/SignUp/SignUpSlice';
 import { useSignUpApiMutation } from '../../apiSlice/userApi/userApiSlice';
@@ -13,21 +13,13 @@ const SignUp = () => {
     const errorMessage = (useAppSelector(state => state.SignUpData.setErrorMsg))
     const dispatch = useAppDispatch();
     const [ trigger ] = useSignUpApiMutation()
-    const signUpHandler = async() =>{
-        try {
-            if(name || email || password || checkPassword){
-                if (password == checkPassword){
-                    const result = await trigger({name, email, password}).unwrap();
-                    router.push('/login');
-                }else{
-                    dispatch(setErrorMsg('確認密碼錯誤'))
-                }
-            }else{
-                dispatch(setErrorMsg('請填入完整資料'))
+    
+    const signUpHandler = () =>{
+        trigger({name, email, password}).then(() => {
+            if(localStorage.getItem('token')) {
+                router.push('./')
             }
-        } catch (error) {
-            dispatch(setErrorMsg('電子信箱已存在'))
-        }
+        }); 
     }
   return (
     <div className=''>
@@ -61,17 +53,17 @@ const SignUp = () => {
                         <button 
                             className='bg-[#3B5998] hover:bg-[#3B5998] text-white font-bold py-2.5 px-3.5 border border-blue-700 rounded'
                             >
-                                    FacekBook 註冊
+                            FacekBook 註冊
                         </button>
                         <p className='flex items-center justigy-start ml-[15px]'>或</p>
                     </div>
                     <div className='h-[40px]'>
                         <p className='text-xs mt-4'>
                             繼續進行代表你同意
-                            <a href='https://www.youtube.com/watch?v=qPSWnnqb3u0&list=PLwEeD5wMgnxJzXBWlLHqbGfXWmwZoTUNX&index=91&ab_channel=JM%E5%94%B1R%26B%E7%9A%84%E9%82%A3%E5%80%8B' 
+                            <a href='' 
                                 className='text-[#0249ba]'
                                 >
-                                    服務條款。
+                                服務條款。
                             </a>
                             </p>
                     </div>
@@ -109,7 +101,7 @@ const SignUp = () => {
                             htmlFor='password'
                             className='text-[14px] mb-[5px] font-semibold'
                         >
-                            密碼 ( 至少六碼 )
+                            密碼 ( 至少八碼 )
                         </label>
                         <input 
                             type='password'
@@ -164,7 +156,7 @@ const SignUp = () => {
                     <div className='h-[30px]'>
                         <p className='text-xs mt-2'>
                             繼續進行代表你同意
-                            <a href='https://www.youtube.com/watch?v=qPSWnnqb3u0&list=PLwEeD5wMgnxJzXBWlLHqbGfXWmwZoTUNX&index=91&ab_channel=JM%E5%94%B1R%26B%E7%9A%84%E9%82%A3%E5%80%8B' 
+                            <a href='' 
                                 className='text-[#0249ba]'
                             >
                             服務條款。

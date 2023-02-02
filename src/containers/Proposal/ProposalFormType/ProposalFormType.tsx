@@ -7,8 +7,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import Stack from '@mui/material/Stack';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import YearSelector from '../../../components/Proposal/DateSelector/YearSelector';
-import MonthSelector from '../../../components/Proposal/DateSelector/MonthSelector';
 import CategorySelector from '../../../components/Proposal/CategorySelector/CategorySelector';
 import { useAppSelector, useAppDispatch } from '../../../store/configureStore';
 import {
@@ -18,8 +16,6 @@ import moment from 'moment';
 
 const ProposalType = () => {
   const router = useRouter();
-  const [yearOfImplementTime, setYearOfImplementTime] = useState<string>(new Date().getFullYear().toString());
-  const [monthOfImplementTime, setMonthOfImplementTime] = useState<string>('一月');
   const { proposalType } = router.query;
   const proposalState = useAppSelector(state => state.proposalData.params);
   const dispatch = useAppDispatch();

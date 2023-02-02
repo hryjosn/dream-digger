@@ -51,7 +51,6 @@ const initialState: proposalDataTypes  = {
         terms_accepted: false,
         terms_acknowledged: false,
     },
-    monthList: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
     categoryList: ['音樂', '攝影', '出版', '時尚', '設計', '表演', '藝術', '科技', '教育', '遊戲', '飲食', '空間', '社會', '插畫漫畫', '電影動畫', '地方招生', '挺好店', '新春賀喜']
 };
 

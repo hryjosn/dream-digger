@@ -26,6 +26,5 @@ export type proposalDataTypes = {
         terms_accepted: boolean,
         terms_acknowledged: boolean,
     },
-    monthList?: Array<string>,
     categoryList?: Array<string>
 };

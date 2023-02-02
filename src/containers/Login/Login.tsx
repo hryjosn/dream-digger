@@ -14,7 +14,11 @@ const Login = () => {
   const [ trigger ] = useLoginApiMutation();
 
   const loginHandler = async () => {
-    const result = await trigger({email: accountState.email, password: accountState.password}).unwrap();
+    trigger({email: accountState.email, password: accountState.password}).then(() => {
+      if (localStorage.getItem('token')) {
+        router.push('/')
+      }
+    });
   }
   return (
     <div className='flex flex-col h-[108vh] overflow-y-auto bg-[#f4f4f5]'>

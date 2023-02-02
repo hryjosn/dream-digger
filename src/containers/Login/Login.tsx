@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { useAppSelector, useAppDispatch } from '../../store/configureStore';
 import { getUserAccount, setErrorMsg } from '../../slice/login/loginSlice';
 import { Input } from '../../components/Input/Input';
@@ -6,6 +7,7 @@ import About from '../../components/About/About';
 import { useLoginApiMutation } from '../../apiSlice/userApi/userApiSlice';
 
 const Login = () => {
+  const router = useRouter();
   const accountState = useAppSelector(state => state.loginPageState.params);
   const errorMsg = useAppSelector(state => state.loginPageState.errorMsg);
   const dispatch = useAppDispatch();
@@ -96,9 +98,9 @@ const Login = () => {
             <div className='w-full mt-[30px] mb-[30px] self-center border-solid border border-[#e5e5e5]'>
           </div>
           <div className='flex w-full text-[0.825rem] font-bold'>
-            <a className='mr-[20px] hover:text-sky-700'>
+            <button className='mr-[20px] hover:text-sky-700' onClick={() => router.push('/signup')}>
               註冊
-            </a>
+            </button>
             <a className='hover:text-sky-700'>
               忘記密碼或重設密碼
             </a>

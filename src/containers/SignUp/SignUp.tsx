@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../store/configureStore';
 import { getSignUpName, getSignUpEmail,  getSignUpPassword, verifyPassword, setErrorMsg } from '../../slice/SignUp/SignUpSlice';
 import { useSignUpApiMutation } from '../../apiSlice/userApi/userApiSlice';
+import { useRouter } from 'next/router';
 
 const SignUp = () => {
+    const router = useRouter();
     const name = (useAppSelector(state => state.SignUpData.params.name));
     const email = (useAppSelector(state => state.SignUpData.params.email));
     const password = (useAppSelector(state => state.SignUpData.params.password));
@@ -16,6 +18,7 @@ const SignUp = () => {
             if(name || email || password || checkPassword){
                 if (password == checkPassword){
                     const result = await trigger({name, email, password}).unwrap();
+                    router.push('/login');
                 }else{
                     dispatch(setErrorMsg('確認密碼錯誤'))
                 }

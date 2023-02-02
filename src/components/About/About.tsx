@@ -3,8 +3,8 @@ import React from 'react'
 const About = () => {
   return (
     <div>
-        <footer className='flex justify-center border-y-[0.5px] h-[255px]'>
-            <div className='flex mt-[80px] space-x-[150px]'>
+        <footer className='flex flex-col align-center justify-center border-y-[0.5px]'>
+            <div className='flex align-center justify-center mt-[80px] space-x-[150px]'>
               <div className='flex items-center h-[90px]'>
                 <p className='font-bold'>DREAM DIGGER</p>
               </div>
@@ -54,10 +54,10 @@ const About = () => {
                 </a>
               </div>
             </div>
+            <div className='flex justify-center'>
+              <p className='text-[13px] text-[#5B5B5B]'>@工作室</p>
+            </div>
         </footer>
-        <div className='flex justify-center h-[135px]'>
-            <p className='mt-[35px] text-[13px] text-[#5B5B5B]'>@工作室</p>
-        </div>
     </div>
    
   )

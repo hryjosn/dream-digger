@@ -23,7 +23,7 @@ const Login = () => {
   return (
     <div className='flex flex-col h-[108vh] overflow-y-auto bg-[#f4f4f5]'>
       <div className='flex basis-4/5 border-solid border-b border-[#e5e5e5]'>
-        <div className='flex justify-center self-center basis-1/2 h-1/5'>
+        <div className='flex justify-center self-center basis-1/2'>
           <div className='flex w-[700px] self-center justify-end whitespace-pre font-bold font-mono'>
             <p>
               Dream Digger   |    實現您的夢想

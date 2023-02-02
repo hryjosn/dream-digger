@@ -10,14 +10,14 @@ const SignUp = () => {
     const email = (useAppSelector(state => state.SignUpData.params.email));
     const password = (useAppSelector(state => state.SignUpData.params.password));
     const checkPassword = (useAppSelector(state => state.SignUpData.verifyPassword))
-    const errorMessage = (useAppSelector(state => state.SignUpData.setErrorMsg))
+    const errorMessage = (useAppSelector(state => state.loginPageState.errorMsg))
     const dispatch = useAppDispatch();
     const [ trigger ] = useSignUpApiMutation()
     
     const signUpHandler = () =>{
         trigger({name, email, password}).then(() => {
             if(localStorage.getItem('token')) {
-                router.push('./')
+                router.push('/')
             }
         }); 
     }

@@ -2,18 +2,18 @@ import React, {useEffect , useState } from 'react'
 import { useRouter } from 'next/router'
 
 const Header = (props: JSX.IntrinsicAttributes & React.ClassAttributes<HTMLInputElement> & React.InputHTMLAttributes<HTMLInputElement>) => {
-
-  const [isLogin, setIsLogin] = useState(false)
+  const router = useRouter();
+  const [isLogin, setIsLogin] = useState(false);
   
   useEffect(() => {
     if(localStorage.getItem('token')){
-      setIsLogin(true)
+      setIsLogin(true);
     }
   },[])
   return (
     <header className='flex justify-center'>
       <div className='flex items-center h-[70px] w-[500px] space-x-6'>
-        <a href='./' className='flex items-center text-[14px] font-bold w-[113px] h-[28px] border-r-[1px]'>
+        <a onClick={() => router.push('/')} className='flex items-center text-[14px] font-bold w-[113px] h-[28px] border-r-[1px] cursor-pointer'>
           Dream Digger
         </a>
         <div className='flex space-x-6'>

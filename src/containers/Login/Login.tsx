@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../store/configureStore';
 import { getEmail, getPassword } from '../../slice/login/loginSlice';
-import { Input } from '../../components/Input/Input'
 import About from '../../components/About/About';
+import { Input } from '../../components/Input/Input';
+import { useUserLoginServiceMutation } from '../../apiSlice/userApi/userApiSlice';
 
 const Login = () => {
+  const [showErrorMsg, setShowErrorMsg] = useState(false);
   const email: string = String(useAppSelector(state => state.userAccount.email));
   const password: string = String(useAppSelector(state => state.userAccount.password));
   const dispatch = useAppDispatch();
+  const [ trigger ] = useUserLoginServiceMutation();
+  const loginHandler = async () => {
+    try{
+      if(email && password){
+        const result = await trigger({email, password}).unwrap();
+        if(result){
+          localStorage.setItem('token', result.token);
+        }
+      }
+    }catch(error){
+      if(error){
+        setShowErrorMsg(true);
+      }
+    }
+  }
   return (
     <div className='flex flex-col h-[108vh] overflow-y-auto bg-[#f4f4f5]'>
       <div className='flex basis-4/5 border-solid border-b border-[#e5e5e5]'>
@@ -18,8 +35,21 @@ const Login = () => {
             </p>
           </div>
         </div>
-        <div className='flex flex-col w-[87%] basis-1/2 bg-[#ffffff] justify-center'>
+        <form className='flex flex-col w-[87%] basis-1/2 bg-[#ffffff] justify-center'>
           <div className='flex flex-col h-auto w-[87%] self-center'>
+            {showErrorMsg ? 
+              (<div className='flex justify-between border-b mb-8 pb-4 text-[#C45059] border-[#C45059]'>
+                <p>Email或密碼是無效的</p>
+                <button 
+                  onClick={() => {
+                    setShowErrorMsg(false)
+                  }}
+                >
+                  ×
+                </button>
+              </div>) : 
+              undefined
+            }
             <button className='px-4 w-full h-[50px] self-center rounded-md font-bold text-left text-white bg-[#3b5998]'>
               Facebook 登入或註冊
             </button>
@@ -42,6 +72,7 @@ const Login = () => {
                   onChange={e => {
                     dispatch(getEmail(e.target.value))
                   }}
+                  required={true}
                 />
                 <p className='mt-1'>
                   密碼
@@ -52,12 +83,13 @@ const Login = () => {
                   onChange={e => {
                     dispatch(getPassword(e.target.value))
                   }}
+                  required={true}
                 />
                 <div className='flex mt-[1.5rem]'>
                   <button 
                     className='h-[42px] w-[84px] mr-[20px] rounded-md border-solid border border-[#229f2a] hover:border-black font-bold text-[#229f2a] hover:text-black'
                     onClick={() =>{
-                      console.log(email,password)
+                      loginHandler();
                     }}
                   >
                     登入
@@ -81,7 +113,7 @@ const Login = () => {
             </a>
           </div>
           </div>
-        </div>
+        </form>
       </div>
       <About/>
     </div>

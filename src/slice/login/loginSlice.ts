@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserAccountStates } from './loginType';
+import { UserAccountType } from "./types";
 
-const initialState: UserAccountStates = {
+const initialState: UserAccountType = {
     email: '',
     password: '',
 };
